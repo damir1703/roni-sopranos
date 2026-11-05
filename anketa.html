@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>RONI × Сопрано · Анкета гостя</title>
+<meta name="theme-color" content="#0b0908">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Mono&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0b0908;--paper:#efe6d2;--red:#d7261e;--red2:#9e140f;--mute:#8d8173;--line:#2a2320}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(ellipse at 50% 0%,rgba(158,20,15,.3),transparent 60%),var(--ink);color:#eae2d3;font-family:'PT Serif',Georgia,serif;min-height:100vh;-webkit-font-smoothing:antialiased}
+.top{text-align:center;padding:34px 20px 10px}
+.top img{width:min(70vw,300px);margin:0 auto}
+.top p{font-family:'PT Mono';letter-spacing:.3em;font-size:11px;color:var(--mute);text-transform:uppercase;margin-top:12px}
+.progress{max-width:680px;margin:18px auto 0;padding:0 20px}
+.progress .tr{height:4px;background:#241d1a}
+.progress .tr i{display:block;height:100%;background:var(--red);transition:width .5s;width:0}
+.progress .lb{display:flex;justify-content:space-between;font-family:'PT Mono';font-size:11px;color:var(--mute);margin-top:8px;letter-spacing:.12em}
+.sheet{max-width:680px;margin:22px auto 60px;padding:0 14px}
+.paper{background:var(--paper);color:#1d1714;padding:38px 34px 30px;position:relative;box-shadow:0 30px 70px rgba(0,0,0,.6);
+ background-image:repeating-linear-gradient(0deg,transparent 0 31px,rgba(80,60,40,.07) 31px 32px),radial-gradient(circle at 20% 10%,rgba(255,255,255,.45),transparent 55%)}
+.paper:before{content:"";position:absolute;top:-10px;left:50%;width:120px;height:26px;margin-left:-60px;background:rgba(235,225,200,.6);transform:rotate(-2deg)}
+.chap{font-family:'PT Mono';font-size:12px;letter-spacing:.25em;color:var(--red2);text-transform:uppercase}
+h1{font-family:'Oswald';font-weight:700;text-transform:uppercase;font-size:clamp(30px,6vw,44px);line-height:1;margin:6px 0 18px}
+.stamp{position:absolute;top:26px;right:24px;font-family:'Oswald';font-weight:700;letter-spacing:.2em;color:var(--red);border:3px solid var(--red);padding:4px 10px;transform:rotate(6deg);font-size:12px;opacity:.75;mix-blend-mode:multiply}
+.intro p{font-size:17px;line-height:1.6;margin-bottom:14px}
+.q{padding:20px 0 18px;border-top:1px dashed rgba(29,23,20,.25)}
+.q .t{font-family:'Oswald';font-weight:600;font-size:18px;line-height:1.3;margin-bottom:4px}
+.q .t b{color:var(--red);margin-right:6px}
+.q .h{font-family:'Caveat';font-size:19px;color:var(--red2);margin-bottom:8px}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt span{display:inline-block;padding:9px 14px;border:1.5px solid #1d1714;font-size:15px;cursor:pointer;transition:all .15s;background:rgba(255,255,255,.25);line-height:1.25}
+.opt span:hover{background:rgba(215,38,30,.08)}
+.opt input:checked+span{background:#1d1714;color:#f3ead8;border-color:#1d1714;box-shadow:3px 3px 0 var(--red)}
+.opt input:focus-visible+span{outline:2px solid var(--red);outline-offset:2px}
+input.txt,textarea{width:100%;font-family:'PT Mono';font-size:15px;background:transparent;border:0;border-bottom:1.5px solid #1d1714;padding:9px 2px;color:#1d1714;margin-top:10px;outline:none}
+textarea{min-height:76px;resize:vertical;border:1.5px solid #1d1714;padding:10px}
+input.txt:focus,textarea:focus{border-color:var(--red)}
+.q.err .t{color:var(--red)}
+.q.err .opts{animation:sh .3s}
+@keyframes sh{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+.btn{font-family:'Oswald';text-transform:uppercase;letter-spacing:.14em;font-size:16px;padding:15px 24px;border:0;background:var(--red);color:#fff;cursor:pointer;transition:background .2s,transform .2s}
+.btn:hover{background:#f0302a;transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:#1d1714;border:1.5px solid #1d1714}
+.btn:disabled{opacity:.6;pointer-events:none}
+.done{text-align:center;padding:30px 0 10px}
+.done .big{font-family:'Oswald';font-weight:700;font-size:40px;text-transform:uppercase;margin:10px 0}
+.done .seal{display:inline-block;margin:10px auto 20px;font-family:'Oswald';font-weight:700;letter-spacing:.2em;color:var(--red);border:4px double var(--red);padding:12px 20px;transform:rotate(-8deg);font-size:20px;animation:seal .5s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes seal{from{transform:rotate(-8deg) scale(2.4);opacity:0}}
+.note{font-family:'PT Mono';font-size:12px;color:var(--mute);text-align:center;margin-top:18px}
+@media (max-width:560px){.paper{padding:30px 20px 24px}.stamp{display:none}.opt span{font-size:14.5px;padding:9px 12px}}
+</style>
+</head>
+<body>
+<div class="top"><img src="img/logo.png" alt="The Sopranos — RONI's Story"><p>RONI × Сопрано · Анкета гостя</p></div>
+<div class="progress"><div class="tr"><i id="bar"></i></div><div class="lb"><span id="chapLbl">Вступление</span><span id="stepLbl"></span></div></div>
+<div class="sheet"><div class="paper" id="paper"></div></div>
+
+<script>
+/* Куда отправлять ответы: URL веб-приложения Google Apps Script (см. apps-script.gs). Пусто = ответы остаются только в браузере. */
+const ENDPOINT = '';
+
+const S='single', M='multi', T='text';
+const CHAPTERS=[
+ {t:'Сериал и RONI',q:[
+  [1,'Насколько вам нравится сериал «Сопрано»?',S,['Пересмотрел несколько раз','Смотрел, но помню поверхностно','Не смотрел, но много слышал','Не смотрел и не слышал']],
+  [2,'Видели наш сериал о RONI в Instagram?',S,['Да, несколько серий','Одну серию','Нет']],
+  [3,'Как часто вы бываете в RONI?',S,['Сегодня впервые','Раз в месяц и реже','Несколько раз в месяц','Раз в неделю и чаще']]]},
+ {t:'Формат вечера',q:[
+  [4,'Удобно ли вам прийти в субботу, 28 ноября?',S,['Да','Скорее да','Нет, суббота неудобна']],
+  [5,'Во сколько удобнее начать?',S,['19:00','20:00','21:00']],
+  [6,'До скольки вы готовы остаться?',S,['До 23:00','До 00:00','До 01:00 и дольше']],
+  [7,'С кем бы вы пришли?',S,['Один','Вдвоём','С друзьями, 3–4 человека','Компанией 5+']],
+  [8,'Какой формат вам ближе?',S,['Сидим за столами','Танцпол','Сначала за столами, потом танцы']],
+  [9,'На каком языке вести программу?',S,['Русский','Узбекский','Оба']],
+  [10,'Что обычно портит вам ивенты?',M,['Очереди в бар','Долгий ведущий','Теснота','Слишком громко','Когда тянут на сцену'],{other:true}]]},
+ {t:'Билет и деньги',q:[
+  [11,'Сколько вы обычно тратите за вечер в баре или ресторане?',S,['До 150 тыс. сум','150–300 тыс. сум','300–500 тыс. сум','500 тыс. сум и больше']],
+  [12,'За что вы в первую очередь готовы платить во входном билете?',S,['Напитки','Еда','Программа и шоу']],
+  [13,'Как вам формат: вход платный, но напитки уже включены в стоимость?',S,['Отлично','Нормально','Лучше бесплатный вход, а плачу за то, что заказываю','Нужен вариант без алкоголя']],
+  [14,'Какая стоимость входа с включёнными напитками для вас приемлема?',S,['150–200 тыс. сум (около 500 мл алкоголя)','200–250 тыс. сум (около 700 мл алкоголя)','400 тыс. сум (безлимитные напитки)','Без алкоголя, свой вариант цены'],{otherFor:'Без алкоголя, свой вариант цены',otherPh:'до ___ тыс. сум'}],
+  [15,'Купили бы билет заранее со скидкой?',S,['Да','Нет, решаю в последний день']]]},
+ {t:'Напитки и еда',q:[
+  [16,'Вы употребляете алкоголь?',S,['Да','Иногда','Нет']],
+  [17,'Что вы обычно пьёте?',M,['Коктейли','Крепкое','Вино','Пиво','Безалкогольное']],
+  [18,'Какая еда нужна на вечере?',S,['Пицца и сеты на стол','Фуршет','Итальянское меню в стиле сериала','Еда не важна']],
+  [19,'Как вы будете добираться?',S,['За рулём','На такси']]]},
+ {t:'Программа и дресс-код',q:[
+  [20,'Что бы вы хотели видеть на ивенте?',M,['Диджей','Дресс-код','Конкурс на лучший костюм, призовой фонд 2 млн сум','Приглашённые гости','Конкурсы','Покер и карточные игры на фишки (без денег)'],{other:true}],
+  [21,'В конкурсах вы участвуете или смотрите со стороны?',S,['Участвую','Смотрю','Зависит от конкурса']],
+  [22,'Придёте в образе по дресс-коду (костюм в стиле мафии 90-х)?',S,['Да, образ уже есть','Да, соберу','Если будет не обязательно — нет']],
+  [23,'Нужна ли вам помощь с образом?',S,['Нет, соберу сам','Пригодятся подсказки и примеры образов','Нужен прокат костюмов']],
+  [24,'Каких блогеров или гостей вы бы хотели видеть на ивенте?',T,null,{opt:true}]]},
+ {t:'Музыка',q:[
+  [25,'Под каких исполнителей вы обычно танцуете?',M,['Зарубежные','Русские','Узбекские']],
+  [26,'Какие жанры?',M,['Хип-хоп','Поп','Шансон','Рэп','Электронная / хаус','Хиты 90-х и 2000-х'],{other:true}],
+  [27,'Каких исполнителей хотели бы услышать?',T,null,{opt:true,hint:'только тех, под кого реально танцуют, медляки оставим на другой раз'}]]},
+ {t:'Как вы узнаёте о вечеринках',q:[
+  [28,'Что скорее всего убедит вас прийти?',S,['Известный гость','Розыгрыш призов','Идут друзья','Скидка на билет']],
+  [29,'Где вы узнаёте о мероприятиях в Ташкенте?',M,['Instagram','Telegram-каналы','TikTok','Блогеры','Друзья']]]},
+ {t:'Ваше мнение',q:[
+  [30,'Насколько вероятно, что вы придёте?',S,['Точно приду','Скорее да','Пока не знаю','Скорее нет']],
+  [31,'Ваши идеи и пожелания к ивенту',T,null,{opt:true,area:true,hint:'мы правда их читаем и учтём при подготовке вечера'}]]},
+ {t:'О вас',q:[
+  [32,'Возраст',S,['До 20','20–24','25–29','30–34','35+']],
+  [33,'Пол',S,['Мужской','Женский']],
+  [34,'Город и район проживания',T,null,{ph:'Ташкент, Юнусабад'}],
+  [35,'Хотите получить приглашение первым? Оставьте Telegram или телефон',T,null,{opt:true,ph:'@username или +998…',hint:'по желанию'}]]},
+];
+const TOTAL=CHAPTERS.length;
+const answers=JSON.parse(localStorage.getItem('roni-anketa-draft')||'{}');
+let step=-1;
+const paper=document.getElementById('paper');
+const save=()=>localStorage.setItem('roni-anketa-draft',JSON.stringify(answers));
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function render(){
+  bar.style.width=(step<0?0:(step+1)/TOTAL*100)+'%';
+  chapLbl.textContent= step<0?'Вступление':(step>=TOTAL?'Готово':CHAPTERS[step].t);
+  stepLbl.textContent= step>=0&&step<TOTAL?`Глава ${step+1} из ${TOTAL}`:'';
+  if(step<0){
+    paper.innerHTML=`<div class="stamp">RISERVATO</div><div class="intro"><div class="chap">Дело №28/11</div><h1>Анкета гостя</h1>
+    <p>Готовим вечер в стиле «Сопрано» в RONI «Гранд». Помогите сделать его таким, каким хотите видеть его вы.</p>
+    <p style="font-family:'PT Mono';font-size:14px">Займёт около 5 минут. Где написано «несколько вариантов», отмечайте сколько угодно. В остальных вопросах — один ответ.</p></div>
+    <div class="nav"><span></span><button class="btn" onclick="go(1)">Начать →</button></div>`;
+    return;
+  }
+  if(step>=TOTAL){ return; }
+  const ch=CHAPTERS[step];
+  let h=`<div class="stamp">RISERVATO</div><div class="chap">Глава ${step+1}</div><h1>${ch.t}</h1>`;
+  ch.q.forEach(([n,t,type,opts,x={}])=>{
+    const key='q'+n, val=answers[key];
+    h+=`<div class="q" data-n="${n}"><div class="t"><b>${n}.</b>${t}</div>`;
+    if(type===M) h+=`<div class="h">несколько вариантов</div>`;
+    if(x.hint) h+=`<div class="h">${x.hint}</div>`;
+    if(type===T){
+      h+= x.area?`<textarea data-k="${key}" placeholder="Пишите как есть">${esc(val||'')}</textarea>`
+               :`<input class="txt" data-k="${key}" value="${esc(val||'')}" placeholder="${x.ph||'Ваш ответ'}">`;
+    } else {
+      h+='<div class="opts">';
+      opts.forEach(o=>{ const on= type===M?(val||[]).includes(o):val===o;
+        h+=`<label class="opt"><input type="${type===M?'checkbox':'radio'}" name="${key}" value="${esc(o)}" ${on?'checked':''}><span>${o}</span></label>`; });
+      h+='</div>';
+      if(x.other) h+=`<input class="txt" data-k="${key}_other" value="${esc(answers[key+'_other']||'')}" placeholder="Свой вариант">`;
+      if(x.otherFor) h+=`<input class="txt" data-k="${key}_other" value="${esc(answers[key+'_other']||'')}" placeholder="${x.otherPh}">`;
+    }
+    h+='</div>';
+  });
+  const last=step===TOTAL-1;
+  h+=`<div class="nav"><button class="btn ghost" onclick="go(-1)">← Назад</button><button class="btn" id="nextBtn" onclick="${last?'submitForm()':'go(1)'}">${last?'Отправить':'Дальше →'}</button></div>`;
+  paper.innerHTML=h;
+}
+paper.addEventListener('change',e=>{
+  const i=e.target; if(!i.name) return;
+  if(i.type==='checkbox') answers[i.name]=[...paper.querySelectorAll(`input[name="${i.name}"]:checked`)].map(x=>x.value);
+  else answers[i.name]=i.value;
+  i.closest('.q').classList.remove('err'); save();
+});
+paper.addEventListener('input',e=>{ const k=e.target.dataset.k; if(k){ answers[k]=e.target.value; save(); }});
+
+function valid(){
+  let ok=true, first=null;
+  CHAPTERS[step].q.forEach(([n,t,type,o,x={}])=>{
+    if(x.opt) return; const v=answers['q'+n];
+    const empty= type===M? !(v&&v.length || (answers['q'+n+'_other']||'').trim()) : !(v&&String(v).trim());
+    const el=paper.querySelector(`.q[data-n="${n}"]`);
+    if(empty){ ok=false; el.classList.add('err'); first=first||el; }
+  });
+  if(first) first.scrollIntoView({behavior:'smooth',block:'center'});
+  return ok;
+}
+function go(d){
+  if(d>0 && step>=0 && !valid()) return;
+  step=Math.max(-1,Math.min(TOTAL-1,step+d)); render(); window.scrollTo({top:0,behavior:'smooth'});
+}
+async function submitForm(){
+  if(!valid()) return;
+  const btn=document.getElementById('nextBtn'); btn.disabled=true; btn.textContent='Отправляем…';
+  const row={ts:new Date().toISOString(),...Object.fromEntries(Object.entries(answers).map(([k,v])=>[k,Array.isArray(v)?v.join('; '):v]))};
+  let sent=false;
+  if(ENDPOINT){
+    try{ await fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(row)}); sent=true; }catch(e){}
+  }
+  const all=JSON.parse(localStorage.getItem('roni-anketa-sent')||'[]'); all.push(row); localStorage.setItem('roni-anketa-sent',JSON.stringify(all));
+  localStorage.removeItem('roni-anketa-draft');
+  step=TOTAL; bar.style.width='100%'; chapLbl.textContent='Готово'; stepLbl.textContent='';
+  paper.innerHTML=`<div class="done"><div class="chap">Дело №28/11</div><div class="seal">ACCETTATO</div>
+   <div class="big">Grazie!</div><p style="font-size:18px">Теперь вы в семье. Увидимся на вечере в RONI «Гранд».</p>
+   ${ENDPOINT&&!sent?'<p class="note" style="color:var(--red2)">Не удалось отправить ответы, проверьте интернет и попробуйте ещё раз.</p>':''}
+   ${!ENDPOINT?'<p class="note">Черновик: таблица для ответов пока не подключена.</p>':''}</div>`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+render();
+</script>
+</body>
+</html>

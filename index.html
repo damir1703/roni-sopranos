@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>RONI × Сопрано · Досье для команды</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0b0908">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Mono&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0b0908; --ink2:#15110f; --paper:#efe6d2; --paper2:#e2d5b9;
+  --red:#d7261e; --red2:#9e140f; --gold:#c9a24a; --mute:#8d8173; --line:#2a2320;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:#eae2d3;font-family:'PT Serif',Georgia,serif;font-size:17px;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body.locked{overflow:hidden}
+a{color:inherit}
+img{max-width:100%;display:block}
+.grain:before{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1.2s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-4%,3%)}40%{transform:translate(3%,-5%)}60%{transform:translate(-6%,1%)}80%{transform:translate(5%,4%)}100%{transform:translate(0,0)}}
+
+/* ============ INTRO ============ */
+#intro{position:fixed;inset:0;z-index:100;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:crosshair;overflow:hidden;transition:transform 1.1s cubic-bezier(.7,0,.2,1),opacity .4s}
+#intro.gone{transform:translateY(-105%)}
+#intro .frame{position:relative;width:min(78vw,380px);aspect-ratio:560/778;border:10px solid #f1ebe0;border-bottom-width:46px;box-shadow:0 30px 80px rgba(0,0,0,.8);transform:rotate(-2deg);background:#111;transition:transform .5s}
+#intro .frame img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15) brightness(.9);transition:filter .6s}
+#intro .frame .cap{position:absolute;left:0;right:0;bottom:-40px;text-align:center;font-family:'Caveat';font-size:24px;color:#222}
+#intro.shot .frame img{filter:grayscale(.2) contrast(1.2) brightness(.8)}
+#intro .tag{font-family:'PT Mono';letter-spacing:.35em;font-size:11px;color:var(--mute);text-transform:uppercase;margin-bottom:22px}
+#intro .hint{margin-top:64px;font-family:'Oswald';letter-spacing:.25em;text-transform:uppercase;font-size:13px;color:#cfc6b8;animation:blink 1.6s ease-in-out infinite}
+#intro .hint b{color:var(--red)}
+@keyframes blink{50%{opacity:.35}}
+#intro .reticle{position:fixed;width:64px;height:64px;margin:-32px 0 0 -32px;pointer-events:none;border:1.5px solid rgba(215,38,30,.85);border-radius:50%;left:-100px;top:-100px;z-index:3}
+#intro .reticle:before,#intro .reticle:after{content:"";position:absolute;background:rgba(215,38,30,.85)}
+#intro .reticle:before{left:50%;top:-10px;bottom:-10px;width:1.5px}
+#intro .reticle:after{top:50%;left:-10px;right:-10px;height:1.5px}
+@media (hover:none){#intro .reticle{display:none}}
+.flash{position:fixed;inset:0;background:#fff;z-index:120;opacity:0;pointer-events:none}
+.flash.on{animation:flash .35s ease-out}
+@keyframes flash{0%{opacity:.95}15%{opacity:.6;background:#ffd9a0}100%{opacity:0}}
+.hole{position:fixed;width:120px;height:120px;margin:-60px 0 0 -60px;z-index:110;pointer-events:none}
+.shake{animation:shake .45s cubic-bezier(.36,.07,.19,.97)}
+@keyframes shake{10%,90%{transform:translate(-2px,1px)}20%,80%{transform:translate(4px,-3px)}30%,50%,70%{transform:translate(-8px,4px)}40%,60%{transform:translate(8px,-4px)}}
+#intro .after{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#000;opacity:0;pointer-events:none;transition:opacity .5s}
+#intro.title .after{opacity:1}
+#intro .after img{width:min(80vw,520px);transform:scale(.85);transition:transform 1.4s ease-out}
+#intro.title .after img{transform:scale(1)}
+#intro .after p{font-family:'PT Mono';color:var(--mute);letter-spacing:.3em;font-size:12px;margin-top:26px;text-transform:uppercase}
+
+/* ============ LAYOUT ============ */
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+section{padding:96px 0;position:relative}
+.kicker{font-family:'PT Mono';font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--red);margin-bottom:14px;display:flex;align-items:center;gap:12px}
+.kicker:before{content:"";width:28px;height:2px;background:var(--red)}
+h2{font-family:'Oswald';font-weight:700;text-transform:uppercase;font-size:clamp(34px,5.4vw,62px);line-height:1;letter-spacing:.01em;margin-bottom:22px}
+h2 em{font-family:'PT Serif';font-style:italic;text-transform:none;font-weight:400;color:var(--red)}
+h3{font-family:'Oswald';font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:21px;margin-bottom:8px}
+.lead{font-size:20px;color:#d6cdbd;max-width:760px}
+.mute{color:var(--mute)}
+.marker{font-family:'Caveat';color:var(--red);font-size:1.25em;line-height:1}
+hr.cut{border:0;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
+
+/* nav */
+nav.top{position:sticky;top:0;z-index:50;background:rgba(11,9,8,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav.top .wrap{display:flex;align-items:center;gap:22px;height:58px;overflow-x:auto;scrollbar-width:none}
+nav.top .wrap::-webkit-scrollbar{display:none}
+nav.top img{height:30px;flex:none}
+nav.top a{font-family:'Oswald';text-transform:uppercase;letter-spacing:.12em;font-size:13px;text-decoration:none;color:#bfb5a5;white-space:nowrap}
+nav.top a:hover{color:var(--red)}
+nav.top .cd{margin-left:auto;font-family:'PT Mono';font-size:13px;color:var(--red);white-space:nowrap}
+
+/* HERO */
+.hero{min-height:min(92vh,880px);display:flex;align-items:center;padding:60px 0;background:
+ radial-gradient(ellipse at 70% 40%,rgba(158,20,15,.28),transparent 60%),linear-gradient(180deg,#0b0908,#120d0b)}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:center}
+.hero .logo{width:min(100%,520px);margin-bottom:26px}
+.stamp{display:inline-block;font-family:'Oswald';font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--red);border:3px solid var(--red);padding:6px 14px;transform:rotate(-4deg);font-size:15px;opacity:.9;mix-blend-mode:screen}
+.hero .facts{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:30px}
+.hero .facts div{background:#100c0b;padding:16px 18px}
+.hero .facts b{display:block;font-family:'Oswald';font-size:26px;color:#fff;font-weight:600}
+.hero .facts span{font-family:'PT Mono';font-size:11px;color:var(--mute);letter-spacing:.15em;text-transform:uppercase}
+.hero .photo{position:relative}
+.hero .photo img{border:10px solid #efe8dc;border-bottom-width:50px;transform:rotate(3deg);box-shadow:0 30px 70px rgba(0,0,0,.7);filter:contrast(1.05)}
+.hero .photo .marker{position:absolute;bottom:8px;left:0;right:0;text-align:center;transform:rotate(3deg);color:#2a201c;font-size:26px}
+.hero .photo .tape{position:absolute;top:-14px;left:40%;width:110px;height:30px;background:rgba(235,225,200,.55);transform:rotate(-6deg)}
+
+/* BRIEF / dossier paper */
+.paper{background:var(--paper);color:#1d1714;padding:46px 46px 40px;position:relative;box-shadow:0 30px 60px rgba(0,0,0,.5);
+  background-image:repeating-linear-gradient(0deg,transparent 0 31px,rgba(80,60,40,.08) 31px 32px),radial-gradient(circle at 20% 10%,rgba(255,255,255,.4),transparent 50%);}
+.paper .typed{font-family:'PT Mono';font-size:15.5px;line-height:1.75}
+.paper .stamp{position:absolute;top:24px;right:26px;mix-blend-mode:multiply}
+.paper h3{color:#1d1714}
+.paper .hl{background:linear-gradient(transparent 55%,rgba(215,38,30,.35) 55%)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.chip{font-family:'Oswald';text-transform:uppercase;letter-spacing:.06em;font-size:14px;border:1.5px solid #1d1714;padding:6px 12px}
+.chip.r{background:var(--red);color:#fff;border-color:var(--red)}
+
+/* CORKBOARD */
+.board{position:relative;height:760px;border-radius:6px;overflow:hidden;border:14px solid #3b2a1d;box-shadow:inset 0 0 80px rgba(0,0,0,.6),0 30px 70px rgba(0,0,0,.6);
+ background-color:#a77b4f;background-image:radial-gradient(rgba(0,0,0,.18) 1px,transparent 1.6px),radial-gradient(rgba(255,240,210,.12) 1px,transparent 1.4px),radial-gradient(ellipse at 30% 20%,rgba(255,220,170,.25),transparent 60%);background-size:7px 7px,11px 11px,100% 100%}
+.board svg.strings{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
+.pin-item{position:absolute;z-index:2;transition:transform .3s}
+.pin-item:hover{transform:scale(1.04) rotate(0deg)!important;z-index:5}
+.pin-item:before{content:"";position:absolute;top:-8px;left:50%;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff6b5f,#a3120c 70%);box-shadow:2px 3px 4px rgba(0,0,0,.5);z-index:4}
+.polaroid{background:#f4efe6;padding:9px 9px 38px;box-shadow:4px 8px 18px rgba(0,0,0,.45)}
+.polaroid img{width:100%;aspect-ratio:3/4;object-fit:cover;filter:sepia(.15) contrast(1.05)}
+.polaroid .marker{position:absolute;bottom:6px;left:0;right:0;text-align:center;color:#222;font-size:21px}
+.polaroid.bw img{filter:grayscale(1) contrast(1.2)}
+.card{background:#fbf6ea;color:#1d1714;padding:16px 18px;box-shadow:4px 8px 18px rgba(0,0,0,.45);font-family:'Caveat';font-size:23px;line-height:1.15;background-image:linear-gradient(transparent 26px,#d24a3f 26px,#d24a3f 27.5px,transparent 27.5px),repeating-linear-gradient(transparent 0 24px,rgba(60,90,160,.18) 24px 25px)}
+.card b{font-family:'Oswald';font-size:13px;letter-spacing:.14em;display:block;margin-bottom:10px;color:#7c1410}
+.card.note{background:#f6dc6b;background-image:none}
+.card.redc{background:#1d1714;color:#efe6d2;background-image:none}
+.card.redc b{color:var(--red)}
+.circleR{position:relative;display:inline-block}
+.circleR svg{position:absolute;left:-12%;top:-30%;width:124%;height:160%;overflow:visible}
+
+/* CALENDAR */
+.cal-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}
+.calendar{background:var(--paper);color:#1d1714;padding:26px 24px 30px;box-shadow:0 30px 60px rgba(0,0,0,.5);position:relative}
+.calendar:before{content:"";position:absolute;top:-14px;left:0;right:0;height:22px;background:repeating-linear-gradient(90deg,transparent 0 24px,#3b3330 24px 30px,transparent 30px 54px)}
+.calendar .mon{display:flex;justify-content:space-between;align-items:baseline;border-bottom:3px solid #1d1714;padding-bottom:10px;margin-bottom:10px}
+.calendar .mon b{font-family:'Anton';font-size:44px;letter-spacing:.04em;line-height:1}
+.calendar .mon span{font-family:'PT Mono';font-size:13px}
+.calendar .dow,.calendar .days{display:grid;grid-template-columns:repeat(7,1fr)}
+.calendar .dow div{font-family:'Oswald';font-size:12px;letter-spacing:.12em;text-align:center;padding:6px 0;color:#7a6c5f}
+.calendar .days div{position:relative;height:74px;border-top:1px solid rgba(29,23,20,.15);padding:6px 6px 0;font-family:'Oswald';font-size:20px}
+.calendar .days div.past{color:#b8aa95}
+.calendar .days div.past:after{content:"";position:absolute;left:18%;right:18%;top:50%;height:2px;background:rgba(29,23,20,.45);transform:rotate(-30deg)}
+.calendar .days div small{display:block;font-family:'Caveat';font-size:15px;line-height:1;color:var(--red2);margin-top:4px}
+.calendar .days div.key svg{position:absolute;left:-2px;top:-2px;width:calc(100% + 4px);height:52px;overflow:visible;pointer-events:none}
+.calendar .days div.key svg path{fill:none;stroke:var(--red);stroke-width:3;stroke-linecap:round;stroke-dasharray:300;stroke-dashoffset:300;transition:stroke-dashoffset 1s ease}
+.calendar.in .days div.key svg path{stroke-dashoffset:0}
+.calendar .days div.today{background:rgba(215,38,30,.08)}
+.calendar .days div.x{font-size:26px;color:var(--red)}
+.calendar .days div.x svg path{stroke-width:4.5}
+.keylist{list-style:none}
+.keylist li{display:grid;grid-template-columns:70px 1fr;gap:14px;padding:13px 0;border-bottom:1px dashed var(--line)}
+.keylist li b{font-family:'Oswald';font-size:20px;color:var(--red)}
+.keylist li span{font-size:16px}
+.keylist li.done{opacity:.45}
+.big-count{display:flex;gap:14px;margin:6px 0 26px;flex-wrap:wrap}
+.big-count div{background:#100c0b;border:1px solid var(--line);padding:12px 14px;min-width:84px;text-align:center}
+.big-count b{display:block;font-family:'Anton';font-size:44px;line-height:1;color:#fff}
+.big-count span{font-family:'PT Mono';font-size:10px;letter-spacing:.2em;color:var(--mute);text-transform:uppercase}
+
+/* GANTT */
+.gantt-box{overflow-x:auto;border:1px solid var(--line);background:#0f0b0a;-webkit-overflow-scrolling:touch}
+.gantt{min-width:980px;position:relative;font-size:14px}
+.g-head,.g-row{display:grid;grid-template-columns:220px 1fr}
+.g-head{position:sticky;top:0;background:#120e0c;border-bottom:1px solid var(--line);z-index:2}
+.g-head .lbl{padding:10px 14px;font-family:'PT Mono';font-size:11px;letter-spacing:.2em;color:var(--mute)}
+.g-days{display:grid;grid-template-columns:repeat(26,1fr)}
+.g-days div{text-align:center;font-family:'Oswald';font-size:12px;padding:10px 0;color:#9b8f80;border-left:1px solid rgba(255,255,255,.04)}
+.g-days div.we{color:#5f554c}
+.g-days div.ev{color:#fff;background:var(--red)}
+.g-row{border-bottom:1px solid rgba(255,255,255,.05)}
+.g-row:hover{background:rgba(255,255,255,.02)}
+.g-row .lbl{padding:12px 14px;border-right:1px solid var(--line)}
+.g-row .lbl b{font-family:'Oswald';font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:14px;display:block}
+.g-row .lbl small{font-family:'PT Mono';font-size:11px;color:var(--mute)}
+.g-track{position:relative;background-image:linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:calc(100%/26) 100%}
+.bar{position:absolute;top:50%;height:24px;margin-top:-12px;border-radius:2px;font-family:'Oswald';font-size:11.5px;letter-spacing:.03em;color:#fff;padding:0 7px;line-height:24px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#4b3d34;box-shadow:inset 0 -2px 0 rgba(0,0,0,.25)}
+.bar.r{background:var(--red)} .bar.g{background:#8a6d2c} .bar.d{background:#2f2724;color:#bfb3a2;border:1px dashed #5c4e45}
+.bar.one{overflow:visible;padding:0;min-width:8px}.bar.one span{position:absolute;left:100%;margin-left:6px;color:#d8ccba;text-shadow:0 1px 2px #000}
+.g-row .lbl,.g-head .lbl{position:sticky;left:0;z-index:2;background:#0f0b0a}.g-head .lbl{background:#120e0c}
+.bar.ms{width:16px!important;height:16px;margin-top:-8px;padding:0;transform:rotate(45deg);background:var(--gold);border-radius:0}
+.today-line{position:absolute;top:0;bottom:0;width:2px;background:var(--red);z-index:1;pointer-events:none}
+.today-line:after{content:"СЕГОДНЯ";position:absolute;top:2px;left:4px;font-family:'PT Mono';font-size:9px;letter-spacing:.15em;color:var(--red);background:#120e0c;padding:0 3px}
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;font-family:'PT Mono';font-size:12px;color:var(--mute)}
+.legend i{display:inline-block;width:14px;height:10px;margin-right:6px;vertical-align:middle}
+
+/* STATS */
+.reels{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.reel{background:#120e0c;border:1px solid var(--line);position:relative;overflow:hidden}
+.reel img{width:100%;aspect-ratio:4/5;object-fit:cover;opacity:.88}
+.reel .meta{padding:16px 18px 20px}
+.reel .views{font-family:'Anton';font-size:42px;line-height:1;color:#fff}
+.reel .views small{font-family:'PT Mono';font-size:11px;color:var(--mute);letter-spacing:.15em;margin-left:6px}
+.reel .barv{height:6px;background:#2a2320;margin:12px 0 10px}
+.reel .barv i{display:block;height:100%;background:var(--red)}
+.reel .rank{position:absolute;top:14px;left:14px;font-family:'Oswald';font-size:13px;letter-spacing:.12em;background:rgba(0,0,0,.7);padding:4px 10px;text-transform:uppercase}
+.reel.star{border-color:var(--red)}
+.reel.star .rank{background:var(--red)}
+.insights{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:26px}
+.ins{border-left:3px solid var(--red);padding:4px 0 4px 18px}
+.ins b{font-family:'Oswald';text-transform:uppercase;font-size:15px;letter-spacing:.06em;display:block;margin-bottom:4px}
+.ins p{font-size:15.5px;color:#cbc1b1}
+.funnel{margin-top:44px;display:grid;gap:8px}
+.f-step{display:grid;grid-template-columns:200px 1fr 120px;gap:16px;align-items:center}
+.f-step .nm{font-family:'Oswald';text-transform:uppercase;font-size:14px;letter-spacing:.06em}
+.f-step .tr{height:38px;background:#16110f;position:relative}
+.f-step .tr i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--red2),var(--red));display:flex;align-items:center;padding-left:12px;font-family:'PT Mono';font-size:12px;color:#fff;white-space:nowrap;transition:width 1.2s ease;width:0}
+.f-step .vl{font-family:'Anton';font-size:26px;text-align:right}
+.fill-me{margin-top:30px;border:1px dashed #5c4e45;padding:20px 22px;font-family:'PT Mono';font-size:13px;color:#bfb3a2}
+.fill-me table{width:100%;border-collapse:collapse;margin-top:10px}
+.fill-me td{padding:7px 4px;border-bottom:1px dotted #3c322d}
+.fill-me td:last-child{text-align:right;color:var(--red);font-family:'Caveat';font-size:22px}
+
+/* SURVEY / SCENARIOS */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.box{background:#120e0c;border:1px solid var(--line);padding:26px}
+.box.redb{border-color:var(--red);background:linear-gradient(160deg,rgba(158,20,15,.25),#120e0c 55%)}
+.box ul{list-style:none;margin-top:10px}
+.box li{padding:7px 0 7px 22px;position:relative;font-size:16px;border-bottom:1px dashed rgba(255,255,255,.06)}
+.box li:before{content:"✕";position:absolute;left:0;color:var(--red);font-size:12px;top:10px}
+.box .lbl{font-family:'PT Mono';font-size:11px;letter-spacing:.22em;color:var(--mute);text-transform:uppercase}
+.box .price{font-family:'Anton';font-size:36px;color:#fff;margin:6px 0 2px}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:30px 0 40px;border:1px solid var(--line)}
+.flow div{padding:20px 18px;border-right:1px solid var(--line);position:relative}
+.flow div:last-child{border-right:0}
+.flow b{font-family:'Anton';font-size:30px;color:var(--red);display:block;line-height:1}
+.flow h3{font-size:16px;margin:8px 0 6px}
+.flow p{font-size:14.5px;color:#bfb5a5}
+table.dec{width:100%;border-collapse:collapse;font-size:15.5px}
+table.dec th{font-family:'PT Mono';font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);text-align:left;padding:10px;border-bottom:2px solid var(--red)}
+table.dec td{padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.dec td:first-child{font-family:'Oswald';color:var(--red);white-space:nowrap}
+.cta{display:inline-flex;align-items:center;gap:12px;background:var(--red);color:#fff;text-decoration:none;font-family:'Oswald';text-transform:uppercase;letter-spacing:.14em;font-size:16px;padding:16px 26px;margin-top:22px;transition:background .2s,transform .2s}
+.cta:hover{background:#f0302a;transform:translateY(-2px)}
+.cta.ghost{background:transparent;border:1.5px solid #6d5f55}
+
+/* WARMUP */
+.weeks{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:3px solid var(--red)}
+.week{padding:22px 18px 10px;border-right:1px solid var(--line)}
+.week:last-child{border-right:0}
+.week .d{font-family:'PT Mono';font-size:12px;color:var(--red);letter-spacing:.1em}
+.week h3{margin:8px 0 10px;font-size:19px}
+.week .q{font-family:'PT Serif';font-style:italic;color:#bfb5a5;font-size:15px;margin-bottom:12px}
+.week ul{list-style:none}
+.week li{font-size:14.5px;padding:6px 0;border-top:1px dashed rgba(255,255,255,.07)}
+
+/* PROGRAM */
+.timeline{position:relative;padding-left:120px}
+.timeline:before{content:"";position:absolute;left:96px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.tl{position:relative;padding:0 0 28px}
+.tl .t{position:absolute;left:-120px;width:80px;text-align:right;font-family:'Anton';font-size:24px;color:#fff;top:-4px}
+.tl:before{content:"";position:absolute;left:-30px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--ink);border:2px solid var(--red)}
+.tl.hot:before{background:var(--red)}
+.tl h3{font-size:18px}
+.tl p{color:#bfb5a5;font-size:15.5px}
+
+/* ROLES */
+.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.role{background:var(--paper);color:#1d1714;padding:22px 22px 18px;position:relative;box-shadow:0 16px 30px rgba(0,0,0,.4)}
+.role .ttl{font-family:'Oswald';font-weight:700;text-transform:uppercase;font-size:18px;letter-spacing:.04em}
+.role .who{font-family:'Caveat';font-size:21px;color:var(--red2);margin-bottom:8px}
+.role label{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;padding:5px 0;cursor:pointer;line-height:1.35}
+.role input{appearance:none;width:16px;height:16px;border:1.5px solid #1d1714;flex:none;margin-top:2px;position:relative;cursor:pointer}
+.role input:checked:after{content:"✕";position:absolute;inset:-6px 0 0 -1px;font-size:18px;color:var(--red);font-weight:700}
+.role input:checked+span{text-decoration:line-through;color:#8a7b6c}
+.role .pct{position:absolute;top:20px;right:20px;font-family:'PT Mono';font-size:12px;color:#7a6c5f}
+
+/* NEXT */
+.next{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--red)}
+.next div{padding:26px 24px;border-right:1px solid rgba(215,38,30,.4)}
+.next div:last-child{border-right:0}
+.next .n{font-family:'Anton';font-size:64px;line-height:1;color:var(--red)}
+.next .when{font-family:'PT Mono';font-size:12px;letter-spacing:.15em;color:var(--mute);margin:6px 0 8px}
+
+/* FOOTER countdown */
+footer{padding:90px 0 70px;text-align:center;background:radial-gradient(ellipse at 50% 100%,rgba(158,20,15,.35),transparent 65%);border-top:1px solid var(--line)}
+footer .logo{width:min(80vw,420px);margin:0 auto 20px}
+.countdown{display:flex;justify-content:center;gap:clamp(8px,2.4vw,26px);margin:30px 0 16px}
+.countdown div{min-width:clamp(68px,17vw,140px)}
+.countdown b{display:block;font-family:'Anton';font-size:clamp(46px,10vw,110px);line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+.countdown span{font-family:'PT Mono';font-size:11px;letter-spacing:.3em;color:var(--mute);text-transform:uppercase}
+.countdown .sep{min-width:0;font-family:'Anton';font-size:clamp(40px,8vw,90px);color:var(--red);line-height:1.1}
+footer .quote{font-family:'PT Serif';font-style:italic;color:#9d917f;margin-top:34px}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s,transform .8s}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  body{font-size:16px}
+  section{padding:70px 0}
+  .hero .wrap,.cal-grid,.two{grid-template-columns:1fr}
+  .hero .photo{max-width:340px;margin:10px auto 0}
+  .reels,.insights,.three,.roles,.next{grid-template-columns:1fr}
+  .next div{border-right:0;border-bottom:1px solid rgba(215,38,30,.4)}
+  .flow{grid-template-columns:1fr 1fr}
+  .flow div:nth-child(2){border-right:0}
+  .flow div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .weeks{grid-template-columns:1fr}
+  .week{border-right:0;border-bottom:1px solid var(--line)}
+  .paper{padding:30px 22px}
+  .paper .stamp{position:static;margin-bottom:16px}
+  .board{height:auto;padding:28px 14px;display:grid;grid-template-columns:1fr 1fr;gap:30px 16px;border-width:10px}
+  .board .pin-item{position:relative!important;left:auto!important;top:auto!important;width:auto!important}
+  .board svg.strings{display:none}
+  .calendar .days div{height:58px;font-size:16px;padding:4px}
+  .calendar .days div small{font-size:12px}
+  .calendar .days div.key svg{height:40px}
+  .f-step{grid-template-columns:110px 1fr 74px;gap:10px}
+  .f-step .nm{font-size:12px}
+  .f-step .vl{font-size:20px}
+  .timeline{padding-left:84px}
+  .timeline:before{left:66px}
+  .tl .t{left:-84px;width:56px;font-size:19px}
+  .tl:before{left:-24px}
+}
+</style>
+</head>
+<body class="grain locked">
+
+<!-- ================= INTRO: выстрел ================= -->
+<div id="intro" aria-label="Нажмите, чтобы открыть">
+  <div class="reticle" id="reticle"></div>
+  <div class="tag">Riservato · только для команды</div>
+  <div class="frame" id="frame">
+    <img src="img/tony.jpg" alt="">
+    <div class="cap">RONI «Гранд» · 28.11</div>
+  </div>
+  <div class="hint">Нажми на фото, чтобы <b>войти в семью</b></div>
+  <div class="after">
+    <img src="img/logo.png" alt="The Sopranos — RONI's Story">
+    <p>Досье операции · 28 ноября</p>
+  </div>
+</div>
+<div class="flash" id="flash"></div>
+
+<nav class="top">
+  <div class="wrap">
+    <img src="img/logo.png" alt="">
+    <a href="#dossier">Досье</a>
+    <a href="#board">Доска</a>
+    <a href="#calendar">Календарь</a>
+    <a href="#gantt">План</a>
+    <a href="#reels">Ролики</a>
+    <a href="#survey">Опрос</a>
+    <a href="#bloggers">Блогеры</a>
+    <a href="#warmup">Прогрев</a>
+    <a href="#program">Вечер</a>
+    <a href="#roles">Задачи</a>
+    <a href="#next">Дальше</a>
+    <span class="cd" id="navCd">—</span>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <span class="stamp">Совершенно секретно</span>
+      <img class="logo" src="img/logo.png" alt="The Sopranos — RONI's Story" style="margin-top:26px">
+      <p class="lead">Вечер в стиле «Сопрано» в RONI «Гранд»: продолжение нашего AI-сериала о RONI, только вживую. Здесь всё, что нужно команде: даты, план, кто за что отвечает и что делаем дальше.</p>
+      <div class="facts">
+        <div><b>28 ноября</b><span>суббота</span></div>
+        <div><b>RONI «Гранд»</b><span>место</span></div>
+        <div><b>170–200</b><span>гостей</span></div>
+        <div><b>2 млн сум</b><span>приз за лучший образ</span></div>
+      </div>
+    </div>
+    <div class="photo">
+      <div class="tape"></div>
+      <img src="img/tony.jpg" alt="Тони в RONI — кадр из AI-сериала">
+      <div class="marker">«Тони» уже у нас</div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= DOSSIER ================= -->
+<section id="dossier">
+  <div class="wrap">
+    <div class="kicker">Дело №28/11</div>
+    <h2>Суть <em>операции</em></h2>
+    <div class="paper reveal">
+      <span class="stamp">Riservato</span>
+      <div class="typed">
+        <p><b>28 ноября в RONI «Гранд»</b> пройдёт вечер в стиле сериала «Сопрано», продолжение нашего <span class="hl">AI-сериала о RONI</span>, только вживую.</p><br>
+        <p>Вечер начинается с <span class="hl">welcome-лимончелло</span> и фотозоны в стиле кадров из сериала. Ведущий открывает программу показом лучших моментов сериала. Дальше конкурсы для гостей и столы для «Мафии» на весь вечер.</p><br>
+        <p>Кульминация: номинация <span class="hl">«Лучший образ»</span> с призовым фондом 2 млн сум, поэтому дресс-код обязателен: костюмы, кожанки, золото, вечерние платья. После неё диджей и танцы до ночи, а ещё приглашённые гости, которых объявим ближе к дате.</p><br>
+        <p>Вечер рассчитан на <b>170–200 гостей</b>. Формат входа объявим после опроса аудитории.</p>
+      </div>
+      <div class="chips">
+        <span class="chip r">Дресс-код обязателен</span>
+        <span class="chip">Конкурсы и интерактивы</span>
+        <span class="chip">Open space: стоячие и сидячие места</span>
+        <span class="chip">Прямой эфир на экран</span>
+        <span class="chip">Покер · карты · «Мафия»</span>
+        <span class="chip">DJ: только то, под что танцуют</span>
+        <span class="chip">Спецгости</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CORK BOARD ================= -->
+<section id="board" style="padding-top:20px">
+  <div class="wrap">
+    <div class="kicker">Доска расследования</div>
+    <h2>Кто, что <em>и как связано</em></h2>
+    <p class="lead mute" style="margin-bottom:34px">Вся операция на одной доске. Красная нить: опрос решает формат, формат решает прогрев, прогрев собирает зал.</p>
+    <div class="board reveal" id="corkboard">
+      <svg class="strings" id="strings"></svg>
+      <div class="pin-item polaroid bw" data-pin style="left:4%;top:7%;width:200px;transform:rotate(-5deg)"><img src="img/tony.jpg" alt=""><div class="marker">Il Capo · AI-Тони</div></div>
+      <div class="pin-item card redc" data-pin style="left:29%;top:6%;width:230px;transform:rotate(3deg)"><b>ЦЕЛЬ</b>170–200 гостей в образах.<br>Зал полный, сторис по всему Ташкенту</div>
+      <div class="pin-item polaroid" data-pin style="left:58%;top:4%;width:180px;transform:rotate(4deg)"><img src="img/chef.jpg" alt=""><div class="marker">Шеф · лицо RONI</div></div>
+      <div class="pin-item card note" data-pin style="left:80%;top:9%;width:170px;transform:rotate(-4deg)"><b>28.11 · СБ</b>RONI «Гранд»<br>время после опроса</div>
+      <div class="pin-item card" data-pin style="left:7%;top:58%;width:230px;transform:rotate(2deg)"><b>ОПРОС · 08–11.11</b>Анкета 35 вопросов<br>цель: 300+ ответов<br>→ решает формат входа</div>
+      <div class="pin-item card" data-pin style="left:36%;top:50%;width:220px;transform:rotate(-3deg)"><b>БЛОГЕРЫ</b>2 волны посева:<br>опрос → анонс.<br>Гости — в образах на ивенте</div>
+      <div class="pin-item polaroid" data-pin style="left:62%;top:48%;width:170px;transform:rotate(-6deg)"><img src="img/pizza.jpg" alt=""><div class="marker">20,8 тыс. 👀</div></div>
+      <div class="pin-item card note" data-pin style="left:81%;top:55%;width:180px;transform:rotate(5deg)"><b>ПРИЗ</b>«Лучший образ»<br><span class="circleR">2 млн сум<svg viewBox="0 0 100 50"><path d="M8 26 C 8 6, 92 4, 94 24 C 96 44, 10 48, 6 28 C 4 18, 30 8, 60 9" fill="none" stroke="#d7261e" stroke-width="2.4" stroke-linecap="round"/></svg></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CALENDAR ================= -->
+<section id="calendar">
+  <div class="wrap">
+    <div class="kicker">Календарь</div>
+    <h2>Ключевые <em>даты</em></h2>
+    <div class="big-count" id="bigCount"></div>
+    <div class="cal-grid">
+      <div class="calendar" id="cal">
+        <div class="mon"><b>НОЯБРЬ</b><span>2026 · Ташкент</span></div>
+        <div class="dow"><div>ПН</div><div>ВТ</div><div>СР</div><div>ЧТ</div><div>ПТ</div><div>СБ</div><div>ВС</div></div>
+        <div class="days" id="days"></div>
+      </div>
+      <ul class="keylist" id="keylist"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GANTT ================= -->
+<section id="gantt" style="padding-top:30px">
+  <div class="wrap">
+    <div class="kicker">Диаграмма Ганта</div>
+    <h2>Кто и когда <em>что делает</em></h2>
+    <p class="lead mute" style="margin-bottom:26px">5–30 ноября по дням. Красная линия — сегодня. На телефоне таблицу можно листать вбок.</p>
+    <div class="gantt-box reveal"><div class="gantt" id="ganttEl"></div></div>
+    <div class="legend">
+      <span><i style="background:var(--red)"></i>Критично: от этого зависит всё остальное</span>
+      <span><i style="background:#4b3d34"></i>Работа</span>
+      <span><i style="background:#8a6d2c"></i>Контент наружу</span>
+      <span><i style="background:var(--gold);transform:rotate(45deg);width:10px"></i>Веха</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REELS / STATS ================= -->
+<section id="reels">
+  <div class="wrap">
+    <div class="kicker">Что уже вышло</div>
+    <h2>Как заходят <em>ролики</em></h2>
+    <p class="lead mute" style="margin-bottom:34px">Последние три рилса в профиле RONI, просмотры на 05.11. Сериал о «Тони» уже набирает больше, чем обычный ролик с шефом, хотя пицца пока впереди всех.</p>
+    <div class="reels">
+      <div class="reel reveal"><span class="rank">№1 по просмотрам</span><img src="img/pizza.jpg" alt=""><div class="meta"><div class="views">20 800<small>просмотров</small></div><div class="barv"><i style="width:100%"></i></div><h3>Пицца с инжиром</h3><p class="mute" style="font-size:15px">Чистый фуд-кадр, крупно. Еда продаёт сама.</p></div></div>
+      <div class="reel star reveal"><span class="rank">Сопрано · AI-сериал</span><img src="img/tony.jpg" alt=""><div class="meta"><div class="views">6 883<small>просмотров</small></div><div class="barv"><i style="width:33%"></i></div><h3>«Тони» в RONI</h3><p class="mute" style="font-size:15px">В 2,2 раза больше ролика с шефом. Тема цепляет.</p></div></div>
+      <div class="reel reveal"><span class="rank">№3</span><img src="img/chef.jpg" alt=""><div class="meta"><div class="views">3 085<small>просмотров</small></div><div class="barv"><i style="width:15%"></i></div><h3>Шеф с пиццей</h3><p class="mute" style="font-size:15px">Лицо бренда. Его снимаем в образе для прогрева.</p></div></div>
+    </div>
+    <div class="insights">
+      <div class="ins reveal"><b>Склеить еду и сериал</b><p>Следующая серия: Тони заказывает ту самую пиццу с инжиром. Крупный фуд-кадр (как у ролика на 20,8 тыс.) плюс сюжет.</p></div>
+      <div class="ins reveal"><b>Каждая серия зовёт на вечер</b><p>Финал серии: «28 ноября. RONI «Гранд». Семья собирается». В описании ссылка на анкету, потом на регистрацию.</p></div>
+      <div class="ins reveal"><b>Мерить по анкетам, а не по лайкам</b><p>Главная цифра прогрева: сколько людей дошло до анкеты и регистрации. Просмотры лишь показывают, что ролик увидели.</p></div>
+    </div>
+
+    <h3 style="margin-top:60px;font-size:24px">Воронка до полного зала <span class="marker" style="font-size:24px">ориентир</span></h3>
+    <p class="mute" style="font-size:15px;max-width:720px">Сколько людей нужно на каждом шаге, чтобы пришли 200 гостей. Конверсии взяты с запасом, после опроса уточним по факту.</p>
+    <div class="funnel" id="funnel">
+      <div class="f-step"><div class="nm">Охват роликов и сторис</div><div class="tr"><i data-w="100">все серии + блогеры</i></div><div class="vl">80 000</div></div>
+      <div class="f-step"><div class="nm">Перешли по ссылке</div><div class="tr"><i data-w="62">~2% от охвата</i></div><div class="vl">1 600</div></div>
+      <div class="f-step"><div class="nm">Заполнили анкету</div><div class="tr"><i data-w="38">~25% перешедших</i></div><div class="vl">400</div></div>
+      <div class="f-step"><div class="nm">Регистрация / билет</div><div class="tr"><i data-w="30">анкета + новые после анонса</i></div><div class="vl">300</div></div>
+      <div class="f-step"><div class="nm">Пришли на вечер</div><div class="tr"><i data-w="22">доходимость 60–70%</i></div><div class="vl">200</div></div>
+    </div>
+    <div class="fill-me">
+      ЗАПОЛНИТЬ ИЗ INSTAGRAM INSIGHTS (SMM, до 08.11), чтобы видеть, кто смотрит сериал:
+      <table>
+        <tr><td>Охват серии с «Тони» (аккаунты)</td><td>____</td></tr>
+        <tr><td>Доля неподписчиков в охвате</td><td>____ %</td></tr>
+        <tr><td>Сохранения и репосты</td><td>____</td></tr>
+        <tr><td>Средний % досмотра</td><td>____ %</td></tr>
+        <tr><td>Возраст и пол аудитории профиля (топ)</td><td>____</td></tr>
+        <tr><td>Переходы по ссылке на анкету (после 08.11)</td><td>____</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SURVEY ================= -->
+<section id="survey" style="background:linear-gradient(180deg,#0b0908,#140e0c 50%,#0b0908)">
+  <div class="wrap">
+    <div class="kicker">Опрос аудитории</div>
+    <h2>Анкета гостя: <em>что спрашиваем и зачем</em></h2>
+    <p class="lead">35 вопросов, около 5 минут. От ответов зависит главное решение: <b>платный вход с напитками или бесплатный</b>. Ещё по ним выбираем время, язык, музыку, гостей и меню.</p>
+    <a class="cta" href="anketa.html" target="_blank">Открыть анкету в стиле «Сопрано» →</a>
+
+    <div class="flow">
+      <div><b>06–07.11</b><h3>Сборка</h3><p>Анкета на сайте, ответы в таблицу. Тест: 5 человек из команды заполняют сами.</p></div>
+      <div><b>08.11</b><h3>Запуск</h3><p>Сторис RONI со ссылкой, пост и закреп. QR на столах и в чеке. Посев у 3–5 блогеров.</p></div>
+      <div><b>08–11.11</b><h3>Сбор</h3><p>Ежедневно сторис-напоминание. Стимул: розыгрыш 2 мест / скидка на билет среди заполнивших.</p></div>
+      <div><b>12.11</b><h3>Решение</h3><p>Сводка по ответам, команда выбирает сценарий входа. 13.11 анонс.</p></div>
+    </div>
+
+    <div class="three" style="margin-bottom:40px">
+      <div class="box"><span class="lbl">Кто публикует</span><ul><li>SMM RONI: сторис каждый день 08–11.11 + пост + закреп в актуальном</li><li>Блогеры: по 1–2 сторис со ссылкой</li><li>Официанты и хостес: QR-карточка на каждом столе</li><li>Эдем и команда: в личные сторис и чаты</li></ul></div>
+      <div class="box"><span class="lbl">Цель по ответам</span><div class="price">300+</div><p class="mute" style="font-size:15px">Минимум 150, чтобы выводы были честными. Меньше 150 к 10.11 → докупаем посев в TG-каналах.</p></div>
+      <div class="box"><span class="lbl">Стимул заполнить</span><ul><li>Розыгрыш 2 мест на вечер среди заполнивших</li><li>Ранний доступ к билетам или столам (вопрос 35)</li><li>Сразу после анкеты: «Ты в семье» и гайд по образу</li></ul></div>
+    </div>
+
+    <h3 style="font-size:24px;margin-bottom:18px">По итогам опроса: два сценария входа</h3>
+    <div class="two" style="margin-bottom:46px">
+      <div class="box redb">
+        <span class="lbl">Сценарий A · «Семья»</span>
+        <div class="price">150–400 тыс. сум</div>
+        <p style="margin-bottom:6px">Платный вход, напитки включены: кола, безалкогольные и алкоголь (по уровням из вопроса 14).</p>
+        <ul>
+          <li><b>Когда:</b> больше половины фанаты (в1: «пересмотрел» + «смотрел»), а в13 «отлично/нормально» ≥ 40%</li>
+          <li>Билеты заранее, early bird со скидкой до 22.11</li>
+          <li>Внутри часть «приколюх» можно сделать платной: фото в образе, турнир по покеру</li>
+        </ul>
+      </div>
+      <div class="box">
+        <span class="lbl">Сценарий B · «Друзья семьи»</span>
+        <div class="price">Вход бесплатный</div>
+        <p style="margin-bottom:6px">Вход по регистрации, гости сами оплачивают свои чеки. Можно ввести депозит за стол.</p>
+        <ul>
+          <li><b>Когда:</b> большинство сериал не смотрели или «знают поверхностно», в13 «лучше бесплатный вход»</li>
+          <li>Люди не платят за сериал, который не смотрели, но придут на движ бесплатно</li>
+          <li>Регистрация обязательна: иначе не держим 170–200</li>
+        </ul>
+      </div>
+    </div>
+    <p class="mute" style="font-size:15px;margin:-26px 0 46px">Пороги предварительные, утверждаем 12.11. Ивент делаем не ради прибыли с билетов: задача — охват и лояльность RONI.</p>
+
+    <h3 style="font-size:24px;margin-bottom:12px">Какой вопрос что решает</h3>
+    <div style="overflow-x:auto">
+    <table class="dec">
+      <tr><th>Вопросы</th><th>Что решаем</th><th>Кто забирает</th></tr>
+      <tr><td>1, 13, 14, 15</td><td>Сценарий входа A или B, цена, early bird</td><td>Организатор</td></tr>
+      <tr><td>4, 5, 6</td><td>Время начала и окончания</td><td>Организатор</td></tr>
+      <tr><td>9</td><td>Язык ведущего: RU / UZ / оба</td><td>Ведущий</td></tr>
+      <tr><td>8, 10</td><td>Рассадка: столы или танцпол, чего избегать (очереди в бар, теснота)</td><td>Площадка</td></tr>
+      <tr><td>16–18</td><td>Бар: объём алкоголя и безалкогольного; формат еды</td><td>Бар · кухня</td></tr>
+      <tr><td>19</td><td>Партнёр-такси или промокод (если многие за рулём)</td><td>Партнёрства</td></tr>
+      <tr><td>20–23</td><td>Программа, конкурсы, гайд по образу и прокат костюмов</td><td>Программа</td></tr>
+      <tr><td>24</td><td>Шорт-лист приглашённых гостей и блогеров</td><td>SMM</td></tr>
+      <tr><td>25–27</td><td>Плейлист DJ: только то, под что танцуют</td><td>DJ</td></tr>
+      <tr><td>28, 29</td><td>Каналы и аргументы прогрева</td><td>SMM</td></tr>
+      <tr><td>35</td><td>База первой волны приглашений</td><td>SMM · хостес</td></tr>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BLOGGERS ================= -->
+<section id="bloggers">
+  <div class="wrap">
+    <div class="kicker">Блогеры и гости</div>
+    <h2>Кого <em>позвать в семью</em></h2>
+    <p class="lead mute" style="margin-bottom:30px">Три волны. Имена берём из вопроса 24 анкеты и из шорт-листа SMM. Шорт-лист готов к 07.11.</p>
+    <div class="three">
+      <div class="box"><span class="lbl">Волна 1 · 08–10.11</span><h3 style="margin-top:8px">Посев опроса</h3><ul><li>3–5 блогеров: фуд и рестораны Ташкента</li><li>Сторис: «RONI готовит вечер в стиле Сопрано, помогите выбрать формат»</li><li>2–3 TG-канала афиш города</li></ul></div>
+      <div class="box"><span class="lbl">Волна 2 · 13–20.11</span><h3 style="margin-top:8px">Анонс и образы</h3><ul><li>Lifestyle и мода: примеряют образ на вечер (кожанка, золото, платье)</li><li>Кино-блогер: «5 сцен “Сопрано”, которые надо знать до 28.11»</li><li>Розыгрыш 2 мест у каждого</li></ul></div>
+      <div class="box redb"><span class="lbl">Волна 3 · 28.11</span><h3 style="margin-top:8px">Гости вечера</h3><ul><li>3–5 приглашённых гостей «в образе»; объявляем 18.11 и 25.11</li><li>Сторис из зала в прямом эфире</li><li>Один из них вручает «Лучший образ»</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WARMUP ================= -->
+<section id="warmup" style="padding-top:30px">
+  <div class="wrap">
+    <div class="kicker">Прогрев</div>
+    <h2>Как ведём к <em>28 ноября</em></h2>
+    <p class="lead mute" style="margin-bottom:34px">Одна история в пяти актах. Каждая серия AI-сериала заканчивается приглашением.</p>
+    <div class="weeks reveal">
+      <div class="week"><div class="d">08–12.11</div><h3>Акт I · Слух</h3><p class="q">«В RONI что-то готовят…»</p><ul><li>Анкета + сторис каждый день</li><li>Серия: Тони заказывает пиццу с инжиром</li><li>Тизер: «Семья собирается. 28.11»</li></ul></div>
+      <div class="week"><div class="d">13–17.11</div><h3>Акт II · Приглашение</h3><p class="q">«Тебя ждут в RONI «Гранд»»</p><ul><li>Официальный анонс + сайт для гостей</li><li>Старт регистрации или билетов</li><li>Гайд «Как собрать образ»</li><li>Приз 2 млн за лучший образ</li></ul></div>
+      <div class="week"><div class="d">18–24.11</div><h3>Акт III · Семья</h3><p class="q">«Кто придёт к Тони?»</p><ul><li>Спецгость №1 (18.11)</li><li>Блогеры в образах</li><li>Новая серия: шеф в образе</li><li>22.11 конец early bird</li></ul></div>
+      <div class="week"><div class="d">25–27.11</div><h3>Акт IV · Последние места</h3><p class="q">«Двери закрываются»</p><ul><li>Спецгость №2, финальный анонс</li><li>Бэкстейдж декора и фотозоны</li><li>Обратный отсчёт в сторис</li></ul></div>
+      <div class="week"><div class="d">28–30.11</div><h3>Акт V · Вечер и после</h3><p class="q">«Это было по-нашему»</p><ul><li>Прямой эфир на экран + сторис</li><li>29.11 победитель «Лучшего образа»</li><li>30.11 aftermovie + фото гостям</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROGRAM ================= -->
+<section id="program" style="background:linear-gradient(180deg,#0b0908,#130d0b)">
+  <div class="wrap">
+    <div class="kicker">Сценарий вечера · черновик</div>
+    <h2>28.11 <em>по минутам</em></h2>
+    <p class="lead mute" style="margin-bottom:40px">Старт сдвинем после опроса (вопрос 5). Структура остаётся такой.</p>
+    <div class="two">
+      <div class="timeline">
+        <div class="tl"><span class="t">19:00</span><h3>Сбор гостей</h3><p>Welcome-лимончелло, фотозона в стиле кадров сериала, хостес отмечает регистрацию.</p></div>
+        <div class="tl hot"><span class="t">19:45</span><h3>Открытие</h3><p>Ведущий + лучшие моменты сериала на экране. Запуск прямого эфира.</p></div>
+        <div class="tl"><span class="t">20:15</span><h3>Конкурс №1</h3><p>Короткий и смешной, без вытаскивания на сцену силой (вопрос 10).</p></div>
+        <div class="tl"><span class="t">20:30</span><h3>Столы «Мафии» и покер</h3><p>Открыты весь вечер, игра на фишки без денег.</p></div>
+        <div class="tl"><span class="t">21:15</span><h3>Конкурсы №2–3 · спецгости</h3><p>Интерактивы с залом, выход приглашённых гостей.</p></div>
+        <div class="tl hot"><span class="t">22:30</span><h3>«Лучший образ» · 2 млн</h3><p>Кульминация. Финалисты на подиуме, вручение.</p></div>
+        <div class="tl"><span class="t">23:00</span><h3>DJ и танцы до ночи</h3><p>Плейлист по ответам анкеты. Никакого «техно ради техно».</p></div>
+      </div>
+      <div>
+        <div class="box" style="margin-bottom:20px"><span class="lbl">Пространство</span><ul><li>Open space: стоячие и сидячие зоны</li><li>Фотозона у входа + зона «Bada Bing» для съёмки</li><li>2+ точки бара, чтобы не было очередей</li><li>Экран: прямой эфир всего вечера</li></ul></div>
+        <div class="box"><span class="lbl">Дресс-код</span><ul><li>Мужчины: костюм, кожанка, золото, тёмные очки</li><li>Женщины: вечернее платье, мех, крупные украшения</li><li>Без образа можно, но в номинации не участвуешь</li><li>Если в анкете много «нужен прокат», ищем партнёра</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ROLES ================= -->
+<section id="roles">
+  <div class="wrap">
+    <div class="kicker">Задачи команды</div>
+    <h2>Кто <em>за что отвечает</em></h2>
+    <p class="lead mute" style="margin-bottom:34px">Галочки сохраняются в вашем браузере. Имена ответственных впишем на планёрке.</p>
+    <div class="roles" id="rolesEl"></div>
+  </div>
+</section>
+
+<!-- ================= NEXT ================= -->
+<section id="next" style="padding-top:30px">
+  <div class="wrap">
+    <div class="kicker">Что дальше</div>
+    <h2>Ближайшие <em>три хода</em></h2>
+    <div class="next reveal">
+      <div><div class="n">01</div><div class="when">ДО 07.11 · ПТ</div><h3>Утвердить анкету</h3><p class="mute" style="font-size:15.5px">Финальная версия вопросов, ответы в таблицу, тест на 5 человек из команды.</p></div>
+      <div><div class="n">02</div><div class="when">ДО 07.11 · ПТ</div><h3>Шорт-лист блогеров</h3><p class="mute" style="font-size:15.5px">3–5 под посев опроса и 2–3 TG-канала. Договориться о сторис на 08–10.11.</p></div>
+      <div><div class="n">03</div><div class="when">08.11 · ВС</div><h3>Запуск опроса</h3><p class="mute" style="font-size:15.5px">Сторис, пост, QR на столах. Ежедневно смотрим число ответов, цель 300+.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER COUNTDOWN ================= -->
+<footer>
+  <div class="wrap">
+    <img class="logo" src="img/logo.png" alt="">
+    <div class="kicker" style="justify-content:center">До начала вечера</div>
+    <div class="countdown" id="countdown">
+      <div><b id="cdD">00</b><span>дней</span></div><div class="sep">:</div>
+      <div><b id="cdH">00</b><span>часов</span></div><div class="sep">:</div>
+      <div><b id="cdM">00</b><span>минут</span></div><div class="sep">:</div>
+      <div><b id="cdS">00</b><span>секунд</span></div>
+    </div>
+    <p class="mute" style="font-family:'PT Mono';font-size:13px">28 ноября 2026 · 19:00 · RONI «Гранд», Ташкент</p>
+    <p class="quote">«Those who want respect, give respect.»</p>
+  </div>
+</footer>
+
+<script>
+/* ===== Event constants ===== */
+const EVENT = new Date('2026-11-28T19:00:00+05:00');
+const TZ_OFFSET = 5; // Ташкент
+function tashkentToday(){ const n=new Date(); return new Date(n.getTime()+ (n.getTimezoneOffset()+TZ_OFFSET*60)*60000); }
+const TODAY = tashkentToday(); const TD = TODAY.getMonth()===10 && TODAY.getFullYear()===2026 ? TODAY.getDate() : (TODAY < new Date(2026,10,1) ? 0 : 99);
+
+/* ===== Gunshot intro ===== */
+const intro=document.getElementById('intro'), reticle=document.getElementById('reticle');
+let fired=false, actx=null;
+document.addEventListener('mousemove',e=>{ if(!fired){reticle.style.left=e.clientX+'px';reticle.style.top=e.clientY+'px';}});
+function gunshot(){
+  try{
+    actx = actx || new (window.AudioContext||window.webkitAudioContext)();
+    const t=actx.currentTime, sr=actx.sampleRate;
+    const buf=actx.createBuffer(1,sr*1.2,sr), d=buf.getChannelData(0);
+    for(let i=0;i<d.length;i++){ d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,5); }
+    const src=actx.createBufferSource(); src.buffer=buf;
+    const lp=actx.createBiquadFilter(); lp.type='lowpass'; lp.frequency.setValueAtTime(6000,t); lp.frequency.exponentialRampToValueAtTime(400,t+.5);
+    const g=actx.createGain(); g.gain.setValueAtTime(1.6,t); g.gain.exponentialRampToValueAtTime(.001,t+1.1);
+    src.connect(lp).connect(g).connect(actx.destination); src.start(t);
+    const o=actx.createOscillator(), og=actx.createGain(); o.type='sine';
+    o.frequency.setValueAtTime(140,t); o.frequency.exponentialRampToValueAtTime(38,t+.25);
+    og.gain.setValueAtTime(1.4,t); og.gain.exponentialRampToValueAtTime(.001,t+.35);
+    o.connect(og).connect(actx.destination); o.start(t); o.stop(t+.4);
+    // shell casing tink
+    setTimeout(()=>{ const c=actx.createOscillator(),cg=actx.createGain(),tt=actx.currentTime; c.type='triangle'; c.frequency.value=3200; cg.gain.setValueAtTime(.12,tt); cg.gain.exponentialRampToValueAtTime(.001,tt+.18); c.connect(cg).connect(actx.destination); c.start(tt); c.stop(tt+.2);},520);
+  }catch(e){}
+}
+function bulletHole(x,y){
+  const s=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  s.setAttribute('viewBox','-60 -60 120 120'); s.classList.add('hole');
+  s.style.left=x+'px'; s.style.top=y+'px';
+  let cracks='';
+  for(let i=0;i<9;i++){ const a=Math.random()*Math.PI*2, l=28+Math.random()*30, mx=Math.cos(a+.3)*l*.5, my=Math.sin(a+.3)*l*.5;
+    cracks+=`<path d="M0 0 L${mx.toFixed(1)} ${my.toFixed(1)} L${(Math.cos(a)*l).toFixed(1)} ${(Math.sin(a)*l).toFixed(1)}" stroke="rgba(255,255,255,.75)" stroke-width="${(Math.random()*1.2+.5).toFixed(2)}" fill="none"/>`; }
+  s.innerHTML=`<circle r="34" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1"/>${cracks}
+   <circle r="11" fill="#e8e0d4" opacity=".55"/><circle r="8" fill="#050303"/><circle r="8" fill="none" stroke="#3a2a20" stroke-width="2.5"/>`;
+  document.body.appendChild(s); return s;
+}
+function fire(e){
+  if(fired) return; fired=true;
+  const x=e.clientX ?? (e.touches&&e.touches[0].clientX) ?? innerWidth/2;
+  const y=e.clientY ?? (e.touches&&e.touches[0].clientY) ?? innerHeight/2;
+  gunshot(); if(navigator.vibrate) navigator.vibrate([60,30,40]);
+  const f=document.getElementById('flash'); f.classList.add('on');
+  const hole=bulletHole(x,y);
+  intro.classList.add('shot','shake'); reticle.style.display='none';
+  setTimeout(()=>{ intro.classList.add('title'); hole.style.transition='opacity .6s'; hole.style.opacity='0'; },850);
+  setTimeout(()=>{ intro.classList.add('gone'); document.body.classList.remove('locked'); },2500);
+  setTimeout(()=>{ intro.remove(); hole.remove(); f.remove(); drawStrings(); },3700);
+}
+intro.addEventListener('click',fire);
+document.addEventListener('keydown',e=>{ if(!fired && (e.key==='Enter'||e.key===' ')) fire({clientX:innerWidth/2,clientY:innerHeight/2}); });
+if(location.hash){ fired=true; intro.remove(); document.getElementById('flash').remove(); document.body.classList.remove('locked'); }
+
+/* ===== Countdown ===== */
+const pad=n=>String(n).padStart(2,'0');
+function tick(){
+  let ms=Math.max(0,EVENT-new Date());
+  const d=Math.floor(ms/864e5), h=Math.floor(ms/36e5)%24, m=Math.floor(ms/6e4)%60, s=Math.floor(ms/1e3)%60;
+  cdD.textContent=pad(d); cdH.textContent=pad(h); cdM.textContent=pad(m); cdS.textContent=pad(s);
+  navCd.textContent = ms ? `${d} дн ${pad(h)}:${pad(m)}:${pad(s)}` : 'Вечер начался';
+  bigCount.innerHTML = ms ? `<div><b>${d}</b><span>дней</span></div><div><b>${pad(h)}</b><span>часов</span></div><div><b>${pad(m)}</b><span>минут</span></div><div><b>${pad(s)}</b><span>секунд</span></div>` : '<div><b>Сегодня</b><span>вечер</span></div>';
+}
+tick(); setInterval(tick,1000);
+
+/* ===== Calendar ===== */
+const KEY = {
+  5:{t:'Бриф команды',done:true}, 7:{t:'Анкета + блогеры'}, 8:{t:'Старт опроса'}, 11:{t:'Конец опроса'},
+  12:{t:'Решение по входу'}, 13:{t:'Анонс + сайт'}, 18:{t:'Спецгость №1'}, 22:{t:'Конец early bird'},
+  25:{t:'Спецгость №2'}, 27:{t:'Генпрогон'}, 28:{t:'ВЕЧЕР', x:true}, 30:{t:'Aftermovie'}
+};
+const KEYLONG = {
+  5:'Бриф: это досье получает команда',7:'Анкета утверждена, шорт-лист блогеров готов',8:'Запуск опроса: сторис, пост, QR, блогеры',
+  11:'Закрываем опрос (цель 300+ ответов)',12:'Сводка и выбор сценария входа A или B, время старта',13:'Официальный анонс, сайт для гостей, старт регистрации',
+  18:'Объявляем спецгостя №1, блогеры в образах',22:'Последний день early bird',25:'Спецгость №2, финальный анонс, бриф всей команды',
+  27:'Монтаж декора и фотозоны, тех. прогон эфира и звука',28:'RONI × Сопрано. RONI «Гранд»',30:'Aftermovie, фото гостям, итоги'
+};
+const circles=['M8 30 C 6 8, 90 4, 94 26 C 98 48, 12 52, 6 32 C 3 20, 30 8, 64 10','M50 4 C 90 4, 98 30, 86 44 C 70 56, 14 52, 6 32 C -2 12, 30 2, 62 8','M10 24 C 14 4, 88 2, 94 22 C 99 44, 20 52, 8 36 C 2 26, 18 10, 46 6'];
+(function(){
+  const days=document.getElementById('days'); let html='';
+  for(let i=0;i<6;i++) html+='<div></div>'; // 1 ноября 2026 — воскресенье
+  for(let d=1; d<=30; d++){
+    const k=KEY[d]; const cls=[]; if(d<TD) cls.push('past'); if(d===TD) cls.push('today'); if(k) cls.push('key'); if(k&&k.x) cls.push('x');
+    html+=`<div class="${cls.join(' ')}">${d}${k?`<small>${k.t}</small><svg viewBox="0 0 100 56" preserveAspectRatio="none"><path d="${circles[d%3]}" style="transition-delay:${(d/30).toFixed(2)}s"/></svg>`:''}</div>`;
+  }
+  for(let i=0;i<6;i++) html+='<div></div>';
+  days.innerHTML=html;
+  keylist.innerHTML=Object.keys(KEYLONG).map(d=>`<li class="${+d<TD?'done':''}"><b>${pad(d)}.11</b><span>${KEYLONG[d]}</span></li>`).join('');
+})();
+
+/* ===== Gantt ===== */
+const G0=5, GN=26; // 5..30 ноября
+const ROWS=[
+ ['Анкета гостя','Организатор',[[5,7,'Сборка + таблица','r'],[8,11,'Сбор ответов','r'],[12,12,'','ms']]],
+ ['Блогеры','SMM',[[5,7,'Шорт-лист'],[8,10,'Посев опроса','g'],[13,20,'Анонс · образы','g'],[28,28,'','ms']]],
+ ['AI-сериал RONI','SMM · видео',[[9,9,'Серия','g'],[16,16,'Серия','g'],[23,23,'Серия','g'],[27,27,'Тизер','g']]],
+ ['Прогрев в сторис','SMM',[[8,12,'Слух'],[13,17,'Приглашение','g'],[18,24,'Семья','g'],[25,27,'Последние места','g']]],
+ ['Сайт для гостей','Разработка',[[9,12,'Сборка'],[13,13,'','ms'],[14,28,'Обновления · таймер','d']]],
+ ['Регистрация / билеты','Организатор',[[13,22,'Early bird','r'],[23,27,'Основная продажа','r']]],
+ ['Программа и ведущий','Программа',[[10,19,'Сценарий · конкурсы'],[20,25,'Реквизит · репетиция']]],
+ ['Гости вечера','Организатор',[[12,17,'Переговоры'],[18,18,'','ms'],[25,25,'','ms']]],
+ ['Декор и фотозона','Площадка',[[14,25,'Закупка · производство'],[27,27,'Монтаж','r']]],
+ ['Бар и кухня','Бар · кухня',[[13,24,'Меню · лимончелло · закупка'],[26,27,'Заготовки']]],
+ ['Тех: эфир, экран, звук','Техника',[[18,26,'Подбор · тест'],[27,27,'Прогон','r']]],
+ ['DJ и плейлист','DJ',[[12,26,'Плейлист по анкете']]],
+ ['Вечер','Вся команда',[[28,28,'ВЕЧЕР','r']]],
+ ['После ивента','SMM',[[29,30,'Итоги · aftermovie','g']]],
+];
+(function(){
+  const dow=['ВС','ПН','ВТ','СР','ЧТ','ПТ','СБ'];
+  let head='<div class="g-head"><div class="lbl">ПОТОК / ОТВЕТСТВЕННЫЙ</div><div class="g-days">';
+  for(let d=G0; d<G0+GN; d++){ const w=new Date(2026,10,d).getDay(); head+=`<div class="${d===28?'ev':(w===0||w===6?'we':'')}">${d}<br><span style="font-size:9px">${dow[w]}</span></div>`; }
+  head+='</div></div>';
+  let rows='';
+  ROWS.forEach(([n,who,bars])=>{
+    rows+=`<div class="g-row"><div class="lbl"><b>${n}</b><small>${who}</small></div><div class="g-track">`;
+    bars.forEach(([a,b,t,c])=>{
+      const l=(a-G0)/GN*100, w=(b-a+1)/GN*100;
+      if(c==='ms') rows+=`<div class="bar ms" title="Веха ${a}.11" style="left:calc(${l+w/2}% - 8px)"></div>`;
+      else if(a===b) rows+=`<div class="bar one ${c||''}" title="${t} · ${a}.11" style="left:${l}%;width:calc(${w}% - 3px)"><span>${t}</span></div>`;
+      else rows+=`<div class="bar ${c||''}" title="${t} · ${a}–${b}.11" style="left:${l}%;width:calc(${w}% - 3px)">${t}</div>`;
+    });
+    rows+='</div></div>';
+  });
+  ganttEl.innerHTML=head+rows;
+  if(TD>=G0 && TD<G0+GN){
+    const line=document.createElement('div'); line.className='today-line';
+    line.style.left=`calc(220px + (100% - 220px) * ${((TD-G0)+.5)/GN})`; ganttEl.appendChild(line);
+  }
+})();
+
+/* ===== Roles checklist ===== */
+const ROLES=[
+ ['Организатор','Эдем',['Утвердить анкету до 07.11','Выбрать сценарий входа 12.11','Цена билета и early bird','Договориться с гостями вечера','Бюджет: приз 2 млн, декор, тех','Финальный бриф команды 25.11']],
+ ['SMM и контент','___',['Цифры из Insights до 08.11','Сторис с анкетой 08–11.11','Шорт-лист блогеров к 07.11','Серии AI-сериала 9 / 16 / 23.11','Гайд по образу к 15.11','Aftermovie 30.11']],
+ ['Сайт и регистрация','___',['Анкета подключена к таблице','Сайт для гостей с таймером к 13.11','Форма регистрации или билетов','Список гостей для хостес 27.11']],
+ ['Программа и ведущий','___',['Сценарий вечера к 19.11','3 конкурса без «тащим на сцену»','Нарезка лучших моментов сериала','Правила номинации «Лучший образ»','Столы «Мафии», покер, фишки']],
+ ['Площадка, бар, кухня','___',['Схема open space: стоячие и сидячие','Welcome-лимончелло на 200','2+ точки бара','Меню по ответам анкеты','Фотозона в стиле кадров сериала']],
+ ['Тех и музыка','___',['Прямой эфир на экран: тест 27.11','Звук и микрофоны ведущего','DJ: плейлист по вопросам 25–27','Фото и видео на весь вечер']],
+];
+(function(){
+  const saved=JSON.parse(localStorage.getItem('roni-sopr-tasks')||'{}');
+  rolesEl.innerHTML=ROLES.map(([t,who,items],ri)=>`<div class="role"><div class="pct" data-r="${ri}"></div><div class="ttl">${t}</div><div class="who">Ответственный: ${who}</div>${items.map((it,ii)=>`<label><input type="checkbox" data-k="${ri}-${ii}" ${saved[ri+'-'+ii]?'checked':''}><span>${it}</span></label>`).join('')}</div>`).join('');
+  function upd(){ ROLES.forEach((r,ri)=>{ const all=rolesEl.querySelectorAll(`input[data-k^="${ri}-"]`), on=[...all].filter(x=>x.checked).length; rolesEl.querySelector(`.pct[data-r="${ri}"]`).textContent=`${on}/${all.length}`; }); }
+  rolesEl.addEventListener('change',e=>{ if(e.target.dataset.k){ saved[e.target.dataset.k]=e.target.checked; localStorage.setItem('roni-sopr-tasks',JSON.stringify(saved)); upd(); }});
+  upd();
+})();
+
+/* ===== Red strings on corkboard ===== */
+function drawStrings(){
+  const board=document.getElementById('corkboard'), svg=document.getElementById('strings');
+  if(innerWidth<=900){ svg.innerHTML=''; return; }
+  const br=board.getBoundingClientRect(); const pins=[...board.querySelectorAll('[data-pin]')].map(p=>{const r=p.getBoundingClientRect(); return [r.left-br.left+r.width/2, r.top-br.top+2];});
+  const links=[[0,1],[1,2],[1,3],[0,4],[4,5],[5,1],[5,6],[6,7],[3,7],[2,6]];
+  svg.innerHTML=links.map(([a,b])=>{const [x1,y1]=pins[a],[x2,y2]=pins[b]; const mx=(x1+x2)/2, my=(y1+y2)/2+28;
+    return `<path d="M${x1} ${y1} Q ${mx} ${my} ${x2} ${y2}" stroke="#c4130c" stroke-width="2" fill="none" opacity=".9" style="filter:drop-shadow(1px 2px 1px rgba(0,0,0,.4))"/>`;}).join('');
+}
+addEventListener('resize',drawStrings); addEventListener('load',drawStrings);
+
+/* ===== Reveal on scroll ===== */
+const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in');
+  if(e.target.id==='funnel') e.target.querySelectorAll('i[data-w]').forEach(i=>i.style.width=i.dataset.w+'%');
+  io.unobserve(e.target);} }),{threshold:.18});
+document.querySelectorAll('.reveal,#cal,#funnel').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

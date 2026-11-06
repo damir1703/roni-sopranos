@@ -185,7 +185,9 @@ const pct=(a,b)=>b?Math.round(a/b*100):0;
 /* ---------- state ---------- */
 let LIVE=[], TEST=null, mode='live', rows=[], view=[], listLimit=50, search='';
 const F={seg:'all',sex:'all',age:'all'};
-let KEY=(location.hash.match(/k=([\w-]+)/)||location.search.match(/[?&]k=([\w-]+)/)||[])[1]||localStorage.getItem('roni-dash-key')||'';
+const cleanKey=k=>String(k||'').replace(/[^0-9a-f]/gi,'').toLowerCase();
+let keyErr=false;
+let KEY=cleanKey((location.hash.match(/k=([\w-]+)/)||location.search.match(/[?&]k=([\w-]+)/)||[])[1]||localStorage.getItem('roni-dash-key'));
 if(KEY){ localStorage.setItem('roni-dash-key',KEY); }
 
 /* ---------- normalize ---------- */
@@ -253,7 +255,7 @@ async function load(){
   status('Загружаем ответы…');
   try{
     const r=await fetch(ENDPOINT+'?key='+encodeURIComponent(KEY)+'&t='+Date.now()); const j=await r.json();
-    if(j.error==='key'){ localStorage.removeItem('roni-dash-key'); KEY=''; LIVE=null; status('<b>Неверный ключ доступа.</b>'); render(); return; }
+    if(j.error==='key'){ localStorage.removeItem('roni-dash-key'); KEY=''; LIVE=null; keyErr=true; status('<b>Неверный ключ доступа.</b>'); render(); return; }
     LIVE=(j.rows||[]).slice().reverse();
     status(`Живые данные · обновлено в ${new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'})} · автообновление раз в минуту`);
   }catch(e){ status('<b>Не удалось загрузить ответы.</b> Проверьте интернет и нажмите «Обновить».'); }
@@ -294,15 +296,16 @@ function render(){
   document.getElementById('testBtn').textContent=mode==='test'?'Выйти из теста':'Тестовый вид';
   if(mode==='live' && LIVE===null){
     app.innerHTML=`<div class="wrap"><div class="empty"><div class="seal">ДОСТУП ПО КЛЮЧУ</div><p>Ответы видит только команда. Введите ключ доступа или откройте ссылку с ключом.</p>
-     <form class="keyform" id="keyForm"><input id="keyIn" placeholder="ключ доступа" autocomplete="off"><button class="btn red">Войти</button></form>
+     <form class="keyform" id="keyForm"><input id="keyIn" placeholder="ключ доступа" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="text"><button class="btn red">Войти</button></form>
+     ${keyErr?'<p style="color:#ff6b62;margin-top:14px" class="mono">Ключ не подошёл. Проверьте: 16 символов, цифры и латинские буквы a–f.</p>':''}
      <p style="margin-top:22px" class="mono mute">или посмотрите <a href="#" onclick="toggleTest();return false" style="color:var(--red)">тестовый вид</a></p></div></div>`;
-    document.getElementById('keyForm').onsubmit=e=>{e.preventDefault();KEY=keyIn.value.trim();localStorage.setItem('roni-dash-key',KEY);load();};
+    document.getElementById('keyForm').onsubmit=e=>{e.preventDefault();KEY=cleanKey(keyIn.value);keyErr=false;localStorage.setItem('roni-dash-key',KEY);load();};
     return;
   }
   rows=(mode==='test'?TEST:LIVE).map(norm); applyFilters();
   if(!rows.length){
     app.innerHTML=`<div class="wrap"><div class="empty"><div class="seal">ДЕЛО ПОКА ПУСТО</div>
-     <p>${ENDPOINT?'Анкета подключена, ждём первые ответы. Они появятся здесь автоматически.':'Таблица для ответов ещё не подключена: анкета пока никуда не отправляет ответы.'}</p>
+     <p>${ENDPOINT?'<b style="color:#7fd18b">✓ Вы вошли.</b> Анкета подключена, но ответов пока 0. Они появятся здесь автоматически, страница обновляется сама раз в минуту.':'Таблица для ответов ещё не подключена: анкета пока никуда не отправляет ответы.'}</p>
      <p>Нажмите «Тестовый вид», чтобы увидеть, как будет выглядеть дашборд, когда анкету заполнят 300–400 человек.</p>
      <button class="btn red" style="margin-top:14px" onclick="toggleTest()">Тестовый вид</button></div></div>`;
     return;

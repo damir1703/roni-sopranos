@@ -185,7 +185,7 @@ const pct=(a,b)=>b?Math.round(a/b*100):0;
 /* ---------- state ---------- */
 let LIVE=[], TEST=null, mode='live', rows=[], view=[], listLimit=50, search='';
 const F={seg:'all',sex:'all',age:'all'};
-let KEY=(location.hash.match(/k=([\w-]+)/)||[])[1]||localStorage.getItem('roni-dash-key')||'';
+let KEY=(location.hash.match(/k=([\w-]+)/)||location.search.match(/[?&]k=([\w-]+)/)||[])[1]||localStorage.getItem('roni-dash-key')||'';
 if(KEY){ localStorage.setItem('roni-dash-key',KEY); }
 
 /* ---------- normalize ---------- */
